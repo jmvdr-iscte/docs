@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "OpenAPI Plant Store",
+    "title": "OpenAPI Unihop Api",
     "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
     "license": {
       "name": "MIT"
@@ -19,9 +19,9 @@
     }
   ],
   "paths": {
-    "/plants": {
+    "/orders": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
+        "description": "Returns all orders from the system that the user has access to",
         "parameters": [
           {
             "name": "limit",
@@ -60,21 +60,312 @@
         }
       },
       "post": {
-        "description": "Creates a new plant in the store",
+        "description": "Creates a new order in the system",
         "requestBody": {
-          "description": "Plant to add to the store",
+          "description": "Order to add to the system",
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "type": "object",
+                "properties": {
+                  "pickup_address": {
+                    "type": "object",
+                    "properties": {
+                      "street": {
+                        "type": "string",
+                        "description": "Street name of the pickup address."
+                      },
+                      "city": {
+                        "type": "string",
+                        "description": "City of the pickup address."
+                      },
+                      "country": {
+                        "type": "string",
+                        "description": "Country of the pickup address."
+                      },
+                      "number": {
+                        "type": "string",
+                        "description": "Street number of the pickup address."
+                      },
+                      "secondary_number": {
+                        "type": "string",
+                        "description": "Apartment or suite number for the pickup address."
+                      },
+                      "county": {
+                        "type": "string",
+                        "description": "County of the pickup address."
+                      },
+                      "state": {
+                        "type": "string",
+                        "description": "State of the pickup address."
+                      },
+                      "postal_code": {
+                        "type": "string",
+                        "description": "Postal or ZIP code of the pickup address."
+                      },
+                      "latitude": {
+                        "type": "number",
+                        "description": "Latitude coordinate of the pickup address."
+                      },
+                      "longitude": {
+                        "type": "number",
+                        "description": "Longitude coordinate of the pickup address."
+                      }
+                    },
+                    "required": [
+                      "street",
+                      "city",
+                      "country"
+                    ],
+                    "description": "The address where the order will be picked up."
+                  },
+                  "pickup_name": {
+                    "type": "string",
+                    "description": "Name of the contact person at the pickup location."
+                  },
+                  "pickup_phone_number": {
+                    "type": "string",
+                    "maxLength": 15,
+                    "description": "Phone number of the pickup contact person."
+                  },
+                  "pickup_instructions": {
+                    "type": "string",
+                    "maxLength": 512,
+                    "description": "Additional instructions for the pickup."
+                  },
+                  "dropoff_start_time": {
+                    "type": "string",
+                    "format": "time",
+                    "description": "Preferred start time for dropoff (HH:MM:SS)."
+                  },
+                  "pickup_start_time": {
+                    "type": "string",
+                    "format": "time",
+                    "description": "Preferred start time for pickup (HH:MM:SS)."
+                  },
+                  "dropoff_address": {
+                    "type": "object",
+                    "properties": {
+                      "street": {
+                        "type": "string",
+                        "description": "Street name of the dropoff address."
+                      },
+                      "city": {
+                        "type": "string",
+                        "description": "City of the dropoff address."
+                      },
+                      "country": {
+                        "type": "string",
+                        "description": "Country of the dropoff address."
+                      },
+                      "number": {
+                        "type": "string",
+                        "description": "Street number of the dropoff address."
+                      },
+                      "secondary_number": {
+                        "type": "string",
+                        "description": "Apartment or suite number for the dropoff address."
+                      },
+                      "county": {
+                        "type": "string",
+                        "description": "County of the dropoff address."
+                      },
+                      "state": {
+                        "type": "string",
+                        "description": "State of the dropoff address."
+                      },
+                      "postal_code": {
+                        "type": "string",
+                        "description": "Postal or ZIP code of the dropoff address."
+                      },
+                      "latitude": {
+                        "type": "number",
+                        "description": "Latitude coordinate of the dropoff address."
+                      },
+                      "longitude": {
+                        "type": "number",
+                        "description": "Longitude coordinate of the dropoff address."
+                      }
+                    },
+                    "required": [
+                      "street",
+                      "city",
+                      "country"
+                    ],
+                    "description": "The address where the order will be delivered."
+                  },
+                  "dropoff_name": {
+                    "type": "string",
+                    "description": "Name of the contact person at the dropoff location."
+                  },
+                  "dropoff_phone_number": {
+                    "type": "string",
+                    "maxLength": 15,
+                    "description": "Phone number of the dropoff contact person."
+                  },
+                  "dropoff_instructions": {
+                    "type": "string",
+                    "maxLength": 512,
+                    "description": "Additional instructions for the dropoff."
+                  },
+                  "package_minimum_vehicle_size": {
+                    "type": "string",
+                    "enum": [
+                      "BIKE",
+                      "MOTORBIKE",
+                      "CARGOBIKECARGO",
+                      "SEDAN",
+                      "CAR",
+                      "SUV",
+                      "PICKUP_TRUCK",
+                      "PICKUP",
+                      "VAN",
+                      "TRUCK",
+                      "ANY"
+                    ],
+                    "description": "Minimum vehicle type required to transport the package."
+                  },
+                  "package_delivery_mode": {
+                    "type": "string",
+                    "enum": [
+                      "NOW",
+                      "SCHEDULED"
+                    ],
+                    "description": "Mode of delivery (NOW or SCHEDULED)."
+                  },
+                  "package_description": {
+                    "type": "string",
+                    "maxLength": 512,
+                    "description": "Description of the package contents."
+                  },
+                  "package_requirements": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "PHOTO_PROOF_OF_DELIVERY",
+                        "SIGNATURE_PROOF_OF_DELIVERY",
+                        "PHOTO_PROOF_OF_PICKUP",
+                        "SIGNATURE_PROOF_OF_PICKUP",
+                        "AGE_VERIFICATION_ON_DELIVERY",
+                        "ID_VERIFICATION_ON_DELIVERY",
+                        "BARCODE_SCAN_ON_PICKUP",
+                        "BARCODE_SCAN_ON_DROPOFF",
+                        "MEET_ON_DELIVERY",
+                        "SHIPPING_LABEL",
+                        "TWO_PERSON_TEAM",
+                        "PINCODE_VERIFICATION",
+                        "SCHEDULE_II_CONTROLLED_SUBSTANCES",
+                        "ALCOHOL",
+                        "PARKING_CHECK_IN",
+                        "DISPLAY_BARCODE_ON_PICKUP"
+                      ]
+                    },
+                    "description": "Special delivery or pickup requirements."
+                  },
+                  "package_pickup_start_time": {
+                    "type": "string",
+                    "format": "time",
+                    "description": "Preferred pickup time for the package (HH:MM:SS)."
+                  },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "quantity": {
+                          "type": "integer"
+                        },
+                        "external_id": {
+                          "type": "string"
+                        },
+                        "external_instance_id": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "integer"
+                        },
+                        "barcode": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "quantity"
+                      ]
+                    },
+                    "description": "List of items included in the delivery."
+                  },
+                  "items_count": {
+                    "type": "integer",
+                    "description": "Total count of items."
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Customer email address for notifications."
+                  },
+                  "delivery_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Preferred delivery date (YYYY-MM-DD)."
+                  },
+                  "delivery_start_time": {
+                    "type": "string",
+                    "format": "time",
+                    "description": "Start time of the delivery window (HH:MM:SS)."
+                  },
+                  "delivery_end_time": {
+                    "type": "string",
+                    "format": "time",
+                    "description": "End time of the delivery window (HH:MM:SS)."
+                  },
+                  "package_value": {
+                    "type": "number",
+                    "minimum": 0,
+                    "description": "Monetary value of the package."
+                  },
+                  "tip": {
+                    "type": "number",
+                    "minimum": 0,
+                    "description": "Optional tip for the delivery."
+                  },
+                  "partner_reference": {
+                    "type": "string",
+                    "maxLength": 256,
+                    "description": "Custom reference provided by the partner."
+                  },
+                  "quote": {
+                    "type": "boolean",
+                    "description": "Indicates whether this is a quote request."
+                  },
+                  "partner_payload": {
+                    "type": "object",
+                    "format": "json",
+                    "description": "Optional custom payload for partner systems."
+                  }
+                },
+                "required": [
+                  "pickup_address",
+                  "pickup_name",
+                  "dropoff_address",
+                  "dropoff_name",
+                  "email"
+                ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
-            "description": "plant response",
+            "description": "Order created successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -96,7 +387,50 @@
         }
       }
     },
-    "/plants/{id}": {
+    "/orders/{uid}": {
+      "get": {
+        "description": "Returns a single order by its unique identifier.",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "path",
+            "description": "Unique identifier (UID) of the order to retrieve.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested order details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Order"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The order with the specified UID was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/{id}": {
       "delete": {
         "description": "Deletes a single plant based on the ID supplied",
         "parameters": [
@@ -154,6 +488,69 @@
   },
   "components": {
     "schemas": {
+      "Order": {
+        "type": "object",
+        "properties": {
+          "uid": {
+            "type": "string",
+            "description": "The unique identifier for the order.",
+            "example": "job_123abc456def"
+          },
+          "status": {
+            "type": "string",
+            "description": "The current status of the order.",
+            "example": "completed"
+          },
+          "partner_reference": {
+            "type": "string",
+            "description": "A reference code provided by the partner.",
+            "example": "partner_ref_78910"
+          },
+          "price": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "format": "float",
+                "description": "The cost of the order."
+              },
+              "currency": {
+                "type": "string",
+                "description": "The currency of the price.",
+                "example": "USD"
+              }
+            }
+          },
+          "distance": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "format": "float",
+                "description": "The distance for the delivery."
+              },
+              "unit": {
+                "type": "string",
+                "description": "The unit of distance.",
+                "example": "miles"
+              }
+            }
+          },
+          "quote": {
+            "type": "boolean",
+            "description": "Indicates if the order is a quote.",
+            "example": false
+          },
+          "partner_payload": {
+            "type": "object",
+            "description": "An arbitrary JSON object for partner-specific data.",
+            "nullable": true,
+            "example": {
+              "custom_field": "custom_value"
+            }
+          }
+        }
+      },
       "Plant": {
         "required": [
           "name"
