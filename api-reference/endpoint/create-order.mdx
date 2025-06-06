@@ -1,0 +1,35 @@
+---
+title: 'Create an Order'
+description: 'This endpoint allows you to create a new order with pickup and dropoff details.'
+---
+
+## Endpoint
+
+<br />
+<RequestExample>
+```bash
+curl --request POST \
+  --url [https://your-api-domain.com/api/orders](https://your-api-domain.com/api/orders) \
+  --header 'Content-Type: application/json' \
+  --header 'Accept: application/json' \
+  --data '{
+    "pickup_address": {
+      "street": "123 Main St",
+      "city": "Anytown",
+      "country": "USA"
+    },
+    "dropoff_address": {
+      "street": "456 Oak Ave",
+      "city": "Someville",
+      "country": "USA"
+    },
+    "pickup_name": "John Doe",
+    "dropoff_name": "Jane Smith",
+    "email": "customer@example.com",
+    "items": [
+      {
+        "name": "Large Box",
+        "quantity": 1
+      }
+    ]
+  }'
