@@ -66,3 +66,156 @@ Customer and Scheduling
 <Properties> <Property name="email" type="string" format="email" required>The email address of the customer placing the order.</Property> <Property name="delivery_date" type="string" format="date">The scheduled date for the delivery.</Property> <Property name="delivery_start_time" type="string">The start of the delivery window, in HH:mm:ss format.</Property> <Property name="delivery_end_time" type="string">The end of the delivery window, in HH:mm:ss format.</Property> </Properties>
 Financials and Partner Information
 <Properties> <Property name="tip" type="numeric">The tip amount for the courier. Must be a non-negative number.</Property> <Property name="partner_reference" type="string">A reference ID from a partner system. (Max: 256 characters)</Property> <Property name="quote" type="boolean">Set to true to receive a quote without creating an order.</Property> <Property name="partner_payload" type="string" format="json">A JSON string for any additional partner-specific data.</Property> </Properties> ```
+---
+title: 'Create an Order'
+description: 'This endpoint allows you to create a new order with pickup and dropoff details.'
+---
+
+## Endpoint
+
+<RequestExample>
+curl --request POST \
+  --url https://your-api-domain.com/api/orders \
+  --header 'Content-Type: application/json' \
+  --header 'Accept: application/json' \
+  --data '{
+    "pickup_address": {
+      "street": "123 Main St",
+      "city": "Anytown",
+      "country": "USA"
+    },
+    "dropoff_address": {
+      "street": "456 Oak Ave",
+      "city": "Someville",
+      "country": "USA"
+    },
+    "pickup_name": "John Doe",
+    "dropoff_name": "Jane Smith",
+    "email": "customer@example.com",
+    "items": [
+      {
+        "name": "Large Box",
+        "quantity": 1
+      }
+    ]
+  }'
+</RequestExample>
+
+This endpoint facilitates the creation of a new delivery order. You must provide details for both the pickup and dropoff locations, information about the items to be transported, and contact details.
+
+---
+
+## Request Body
+
+### Pickup Information
+
+<Properties>
+  <Property name="pickup_address" type="object" required>
+    An object containing the full address for the pickup location.
+    <Properties>
+      <Property name="street" type="string" required>The street name and number.</Property>
+      <Property name="city" type="string" required>The city for the pickup.</Property>
+      <Property name="country" type="string" required>The country for the pickup.</Property>
+      <Property name="number" type="string">The building or suite number.</Property>
+      <Property name="secondary_number" type="string">Additional address information.</Property>
+      <Property name="county" type="string">The county or administrative region.</Property>
+      <Property name="state" type="string">The state or province.</Property>
+      <Property name="postal_code" type="string">The postal or ZIP code.</Property>
+      <Property name="latitude" type="numeric">The geographic latitude.</Property>
+      <Property name="longitude" type="numeric">The geographic longitude.</Property>
+    </Properties>
+  </Property>
+
+  <Property name="pickup_name" type="string" required>The name of the person at the pickup location.</Property>
+  <Property name="pickup_phone_number" type="string">The phone number for the pickup contact. (Max: 15 characters)</Property>
+  <Property name="pickup_instructions" type="string">Any special instructions for the courier at pickup. (Max: 512 characters)</Property>
+  <Property name="pickup_start_time" type="string">The start of the window for pickup, in HH:mm:ss format.</Property>
+</Properties>
+
+---
+
+### Dropoff Information
+
+<Properties>
+  <Property name="dropoff_address" type="object" required>
+    An object containing the full address for the dropoff location.
+    <Properties>
+      <Property name="street" type="string" required>The street name and number.</Property>
+      <Property name="city" type="string" required>The city for the dropoff.</Property>
+      <Property name="country" type="string" required>The country for the dropoff.</Property>
+      <Property name="number" type="string">The building or suite number.</Property>
+      <Property name="secondary_number" type="string">Additional address information.</Property>
+      <Property name="county" type="string">The county or administrative region.</Property>
+      <Property name="state" type="string">The state or province.</Property>
+      <Property name="postal_code" type="string">The postal or ZIP code.</Property>
+      <Property name="latitude" type="numeric">The geographic latitude.</Property>
+      <Property name="longitude" type="numeric">The geographic longitude.</Property>
+    </Properties>
+  </Property>
+
+  <Property name="dropoff_name" type="string" required>The name of the recipient at the dropoff location.</Property>
+  <Property name="dropoff_phone_number" type="string">The phone number for the dropoff contact. (Max: 15 characters)</Property>
+  <Property name="dropoff_instructions" type="string">Any special instructions for the courier at dropoff. (Max: 512 characters)</Property>
+  <Property name="dropoff_start_time" type="string">The start of the window for dropoff, in HH:mm:ss format.</Property>
+</Properties>
+
+---
+
+### Package and Delivery Details
+
+<Properties>
+  <Property name="package_minimum_vehicle_size" type="string">
+    Specifies the minimum size of the vehicle required.
+    Accepted values: BIKE, MOTORBIKE, CARGOBIKECARGO, SEDAN, CAR, SUV, PICKUP_TRUCK, PICKUP, VAN, TRUCK, ANY.
+  </Property>
+  <Property name="package_delivery_mode" type="string">NOW or SCHEDULED.</Property>
+  <Property name="package_description" type="string">A description of the package contents. (Max: 512 characters)</Property>
+  <Property name="package_requirements" type="array">
+    An array of special requirements for the delivery.
+    Accepted values: PHOTO_PROOF_OF_DELIVERY, SIGNATURE_PROOF_OF_DELIVERY, PHOTO_PROOF_OF_PICKUP, SIGNATURE_PROOF_OF_PICKUP, AGE_VERIFICATION_ON_DELIVERY, ID_VERIFICATION_ON_DELIVERY, BARCODE_SCAN_ON_PICKUP, BARCODE_SCAN_ON_DROPOFF, MEET_ON_DELIVERY, SHIPPING_LABEL, TWO_PERSON_TEAM, PINCODE_VERIFICATION, SCHEDULE_II_CONTROLLED_SUBSTANCES, ALCOHOL, PARKING_CHECK_IN, DISPLAY_BARCODE_ON_PICKUP.
+  </Property>
+  <Property name="package_pickup_start_time" type="string">The start time for package pickup, in HH:mm:ss format.</Property>
+  <Property name="package_value" type="numeric">The total value of the package. Must be a non-negative number.</Property>
+</Properties>
+
+---
+
+### Itemization
+
+<Properties>
+  <Property name="items" type="array">
+    An array of item objects.
+    <Properties>
+      <Property name="name" type="string" required>The name of the item.</Property>
+      <Property name="description" type="string">A description of the item.</Property>
+      <Property name="quantity" type="integer" required>The quantity of this item.</Property>
+      <Property name="external_id" type="string">An external identifier for the item.</Property>
+      <Property name="external_instance_id" type="string">An external instance identifier for the item.</Property>
+      <Property name="price" type="integer">The price of the item in the smallest currency unit (e.g., cents).</Property>
+      <Property name="barcode" type="string">The barcode of the item.</Property>
+    </Properties>
+  </Property>
+  <Property name="items_count" type="integer">The total count of all items.</Property>
+</Properties>
+
+---
+
+### Customer and Scheduling
+
+<Properties>
+  <Property name="email" type="string" format="email" required>The email address of the customer placing the order.</Property>
+  <Property name="delivery_date" type="string" format="date">The scheduled date for the delivery.</Property>
+  <Property name="delivery_start_time" type="string">The start of the delivery window, in HH:mm:ss format.</Property>
+  <Property name="delivery_end_time" type="string">The end of the delivery window, in HH:mm:ss format.</Property>
+</Properties>
+
+---
+
+### Financials and Partner Information
+
+<Properties>
+  <Property name="tip" type="numeric">The tip amount for the courier. Must be a non-negative number.</Property>
+  <Property name="partner_reference" type="string">A reference ID from a partner system. (Max: 256 characters)</Property>
+  <Property name="quote" type="boolean">Set to true to receive a quote without creating an order.</Property>
+  <Property name="partner_payload" type="string" format="json">A JSON string for any additional partner-specific data.</Property>
+</Properties>
