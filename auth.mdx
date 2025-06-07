@@ -1,0 +1,36 @@
+# Authentication Guide (RS256)
+
+To authenticate with our API, you’ll need to generate a **public/private RSA key pair**. We use **RS256** (RSA Signature with SHA-256) to sign and verify requests securely.
+
+This guide will help you:
+
+1. ✅ Generate your keys
+2. 🛠 Use them to sign JWTs
+3. 🔑 Share your public key with us
+
+---
+
+## 1. 🔐 Generate RSA Key Pair
+
+Run the following command in your terminal to generate a 2048-bit RSA key pair:
+
+```bash
+openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048
+```
+
+This creates your private key file: **private_key.pem.**
+
+Now generate the public key:
+
+```bash
+openssl rsa -pubout -in private_key.pem -out public_key.pem
+``` 
+
+You should now have:
+
+**private_key.pem** (keep this safe and secret)
+
+**public_key.pem** (you’ll send this to us)
+
+## 2. 🔐 Encode your JWTs
+
