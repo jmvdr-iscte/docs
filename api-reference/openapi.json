@@ -364,12 +364,12 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Order created successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Plant"
+                  "$ref": "#/components/schemas/OrderCreated"
                 }
               }
             }
@@ -430,24 +430,66 @@
         }
       }
     },
-    "/orders/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
+    "/orders/partner/{partner_reference}": {
+      "get": {
+        "description": "Returns a single order by its unique partner_reference.",
         "parameters": [
           {
-            "name": "id",
+            "name": "partner_reference",
             "in": "path",
-            "description": "ID of plant to delete",
+            "description": "Partner reference of the order to retrieve.",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested order details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Order"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The order with the specified UID was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/{uid}/cancel": {
+      "post": {
+        "description": "Deletes a single ord based on the UID supplied",
+        "parameters": [
+          {
+            "name": "uid",
+            "in": "path",
+            "description": "UID of the order to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
         "responses": {
           "204": {
-            "description": "Plant deleted",
+            "description": "Order deleted",
             "content": {}
           },
           "400": {
@@ -550,6 +592,70 @@
             }
           }
         }
+      },
+      "OrderCreated": {
+        "type": "object",
+        "description": "Successful response returned after an order is created.",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Order created successfully"
+          },
+          "uid": {
+            "type": "string",
+            "description": "Unique identifier of the created order",
+            "example": "ord_123456"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "created"
+              },
+              "partner_reference": {
+                "type": ["string", "null"],
+                "example": "partner_xyz_001"
+              },
+              "price": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 29.99
+                  },
+                  "currency": {
+                    "type": "string",
+                    "example": "USD"
+                  }
+                },
+                "required": ["value", "currency"]
+              },
+              "distance": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 5.5
+                  },
+                  "unit": {
+                    "type": "string",
+                    "example": "miles"
+                  }
+                },
+                "required": ["value", "unit"]
+              },
+              "quote": {
+                "type": "boolean",
+                "example": false
+              }
+            },
+            "required": ["status", "price", "distance", "quote"]
+          }
+        },
+        "required": ["message", "uid", "data"]
       },
       "Plant": {
         "required": [

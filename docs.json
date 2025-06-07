@@ -47,6 +47,7 @@
             "group": "Endpoint Examples",
             "pages": [
               "api-reference/endpoint/get",
+              "api-reference/endpoint/get-partner-order",
               "api-reference/endpoint/create-order",
               "api-reference/endpoint/delete",
               "api-reference/endpoint/webhook"
