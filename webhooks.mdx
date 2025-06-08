@@ -1,0 +1,79 @@
+# Webhook System Documentation
+
+This document provides comprehensive documentation for our webhook system, detailing the event types, request body structure, and authentication mechanisms.
+
+
+
+
+## Event Types
+
+Our webhook system dispatches requests based on specific event names, categorized primarily into `delivery` and `location` events. Each event signifies a distinct state change or action within our system.
+
+### Delivery Events
+
+Delivery events provide updates on the lifecycle of a delivery, from assignment to completion or failure. The following is a comprehensive list of delivery event types:
+
+- `delivery.assigned`: A delivery has been assigned.
+- `delivery.pickup_arrived`: The delivery driver has arrived at the pickup location.
+- `delivery.pickup_complete`: The delivery driver has completed the pickup.
+- `delivery.dropoff_arrived`: The delivery driver has arrived at the dropoff location.
+- `delivery.dropoff_complete`: The delivery driver has completed the dropoff.
+- `delivery.canceled`: The delivery has been canceled.
+- `delivery.return_in_progress`: The delivery is in the process of being returned.
+- `delivery.returned`: The delivery has been successfully returned.
+- `delivery.failed`: The delivery has failed.
+- `delivery.pickup_enroute`: The delivery driver is enroute to the pickup location.
+- `delivery.dropoff_enroute`: The delivery driver is enroute to the dropoff location.
+
+### Location Events
+
+Location events provide updates on the geographical status of a delivery or driver. The following is a comprehensive list of location event types:
+
+- `location.pickup_enroute`: The driver is enroute to the pickup location.
+- `location.assigned_driver`: A driver has been assigned to the delivery.
+- `location.pickup_complete`: The driver has completed the pickup and is now enroute to the dropoff.
+- `location.dropoff_enroute`: The driver is enroute to the dropoff location.
+- `location.return_in_progress`: The driver is in the process of returning to the origin.
+
+
+
+
+## Request Body Structure
+
+All webhook requests are sent as `POST` requests with a JSON payload. The structure of the request body is consistent across all event types and contains detailed information pertinent to the event. Below is a breakdown of the fields included in the request body:
+
+```json
+{
+  "event_name": "string",
+  "status": "string",
+  "price": {
+    "value": "number",
+    "currency": "string"
+  },
+  "currency": "string",
+  "distance": {
+    "value": "number",
+    "unit": "string"
+  },
+  "pickup_name": "string",
+  "dropoff_name": "string",
+  "delivery_date": "string",
+  "delivery_start_time": "string",
+  "partner_payload": "any"
+}
+```
+
+### Field Descriptions
+
+| Field Name          | Type    | Description                                 
+
+
+## Authentication Headers
+
+All webhook requests include the following headers:
+
+| Header          | Description                                                              |
+|-----------------|--------------------------------------------------------------------------|
+| `Content-Type`  | Set to `application/json`                                                |
+| `Accept`        | Set to `application/json`                                                |
+| `Authorization` | Bearer token containing a JWT encoded version of the request body.       |
