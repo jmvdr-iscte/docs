@@ -144,6 +144,11 @@
                     "format": "time",
                     "description": "Preferred start time for pickup (HH:MM:SS)."
                   },
+                  "weight": {
+                    "type": "number",
+                    "minimum": 0,
+                    "description": "Weight of the package in lbs."
+                  },
                   "dropoff_address": {
                     "type": "object",
                     "properties": {
