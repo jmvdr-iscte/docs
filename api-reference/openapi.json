@@ -134,15 +134,15 @@
                     "maxLength": 512,
                     "description": "Additional instructions for the pickup."
                   },
-                  "dropoff_start_time": {
+                    "dropoff_start_time": {
                     "type": "string",
-                    "format": "time",
-                    "description": "Preferred start time for dropoff (HH:MM:SS)."
+                    "format": "date-time",
+                    "description": "Preferred start time for dropoff in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±HH:MM)."
                   },
-                  "pickup_start_time": {
+                    "pickup_start_time": {
                     "type": "string",
-                    "format": "time",
-                    "description": "Preferred start time for pickup (HH:MM:SS)."
+                    "format": "date-time",
+                    "description": "Preferred start time for pickup in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±HH:MM)."
                   },
                   "weight": {
                     "type": "number",
