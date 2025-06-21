@@ -14,16 +14,16 @@ Our webhook system dispatches requests based on specific event names, categorize
 Delivery events provide updates on the lifecycle of a delivery, from assignment to completion or failure. The following is a comprehensive list of delivery event types:
 
 - `delivery.assigned`: A delivery has been assigned.
+- `delivery.pickup_enroute`: The delivery driver is enroute to the pickup location.
 - `delivery.pickup_arrived`: The delivery driver has arrived at the pickup location.
 - `delivery.pickup_complete`: The delivery driver has completed the pickup.
+- `delivery.dropoff_enroute`: The delivery driver is enroute to the dropoff location.
 - `delivery.dropoff_arrived`: The delivery driver has arrived at the dropoff location.
 - `delivery.dropoff_complete`: The delivery driver has completed the dropoff.
-- `delivery.canceled`: The delivery has been canceled.
 - `delivery.return_in_progress`: The delivery is in the process of being returned.
 - `delivery.returned`: The delivery has been successfully returned.
+- `delivery.canceled`: The delivery has been canceled.
 - `delivery.failed`: The delivery has failed.
-- `delivery.pickup_enroute`: The delivery driver is enroute to the pickup location.
-- `delivery.dropoff_enroute`: The delivery driver is enroute to the dropoff location.
 
 ### Location Events
 
