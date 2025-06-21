@@ -106,6 +106,11 @@ All webhook requests are sent as `POST` requests with a JSON payload. The struct
   "items_count": "number",
   "items": "array",
   "weight": "number",
+  "dimentions": {
+    "height": "number",
+    "length": "number",
+    "width": "number"
+  },
   "package_value": "number",
   "pickup_start_time": "string",
   "dropoff_start_time": "string",
@@ -161,6 +166,7 @@ All webhook requests are sent as `POST` requests with a JSON payload. The struct
 | `items_count` | number | The number of items in the package. |
 | `items` | array | A list of objects, each detailing an item in the package. Can be null. |
 | `weight` | number | The weight of the package. |
+| `dimentions` | object | The dimentions of the package. |
 | `package_value` | number | The declared value of the package, converted from cents. |
 | `pickup_start_time` | string | The start time of the pickup window, formatted as `HH:MM:SS`. |
 | `dropoff_start_time` | string | The start time of the dropoff window, formatted as `HH:MM:SS`. |

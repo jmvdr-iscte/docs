@@ -139,15 +139,41 @@
                     "format": "date-time",
                     "description": "Preferred start time for dropoff in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±HH:MM)."
                   },
-                    "pickup_start_time": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "Preferred start time for pickup in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±HH:MM)."
+                  "pickup_start_time": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Preferred start time for pickup in ISO 8601 format (YYYY-MM-DDTHH:MM:SS±HH:MM)."
                   },
                   "weight": {
                     "type": "number",
                     "minimum": 0,
                     "description": "Weight of the package in lbs."
+                  },
+                  "dimensions": {
+                    "type": "object",
+                    "properties": {
+                      "length": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Length of the package in inches."
+                      },
+                      "width": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Width of the package in inches."
+                      },
+                      "height": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "Height of the package in inches."
+                      }
+                    },
+                    "required": [
+                      "length",
+                      "width",
+                      "height"
+                    ],
+                    "description": "Dimensions of the package."
                   },
                   "dropoff_address": {
                     "type": "object",
@@ -342,6 +368,11 @@
                     "minimum": 0,
                     "description": "Optional tip for the delivery."
                   },
+                  "currency": {
+                    "type": "string",
+                    "maxLength": 3,
+                    "description": "The intended currency."
+                  },
                   "partner_reference": {
                     "type": "string",
                     "maxLength": 256,
@@ -362,7 +393,8 @@
                   "pickup_name",
                   "dropoff_address",
                   "dropoff_name",
-                  "email"
+                  "email",
+                  "currency"
                 ]
               }
             }
