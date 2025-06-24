@@ -99,6 +99,7 @@ All webhook requests are sent as `POST` requests with a JSON payload. The struct
   },
   "dropoff_phone_number": "string",
   "dropoff_instructions": "string",
+  "dropoff_email": "string",
   "package_description": "string",
   "package_minimum_vehicle_size": "string",
   "package_delivery_mode": "string",
@@ -159,6 +160,7 @@ All webhook requests are sent as `POST` requests with a JSON payload. The struct
 | `email` | string | The email address of the contact person at the pickup location. |
 | `dropoff_phone_number` | string | The contact phone number for the dropoff location. |
 | `dropoff_instructions` | string | Special instructions for the courier at the dropoff location. |
+| `dropoff_email ` | string | The email of the entity to contact. |
 | `package_description`| string | A description of the contents of the package being delivered. |
 | `package_minimum_vehicle_size`| string | The minimum vehicle size required for this delivery (e.g., `CAR`, `BIKE`). |
 | `package_delivery_mode` | string | The delivery mode, indicating if it's on-demand (`NOW`) or scheduled. |
