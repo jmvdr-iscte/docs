@@ -531,68 +531,296 @@
   },
   "components": {
     "schemas": {
-      "Order": {
+  "Order": {
+    "type": "object",
+    "properties": {
+      "uid": {
+        "type": "string",
+        "description": "The unique identifier for the order.",
+        "example": "job_123abc456def"
+      },
+      "status": {
+        "type": "string",
+        "description": "The current status of the order.",
+        "example": "DROPOFF_COMPLETE"
+      },
+      "partner_reference": {
+        "type": "string",
+        "description": "A reference code provided by the partner.",
+        "example": "partner_ref_78910"
+      },
+      "price": {
         "type": "object",
         "properties": {
-          "uid": {
+          "value": {
+            "type": "number",
+            "format": "float",
+            "description": "The cost of the order."
+          },
+          "currency": {
             "type": "string",
-            "description": "The unique identifier for the order.",
-            "example": "job_123abc456def"
-          },
-          "status": {
-            "type": "string",
-            "description": "The current status of the order.",
-            "example": "completed"
-          },
-          "partner_reference": {
-            "type": "string",
-            "description": "A reference code provided by the partner.",
-            "example": "partner_ref_78910"
-          },
-          "price": {
-            "type": "object",
-            "properties": {
-              "value": {
-                "type": "number",
-                "format": "float",
-                "description": "The cost of the order."
-              },
-              "currency": {
-                "type": "string",
-                "description": "The currency of the price.",
-                "example": "USD"
-              }
-            }
-          },
-          "distance": {
-            "type": "object",
-            "properties": {
-              "value": {
-                "type": "number",
-                "format": "float",
-                "description": "The distance for the delivery."
-              },
-              "unit": {
-                "type": "string",
-                "description": "The unit of distance.",
-                "example": "miles"
-              }
-            }
-          },
-          "quote": {
-            "type": "boolean",
-            "description": "Indicates if the order is a quote.",
-            "example": false
-          },
-          "partner_payload": {
-            "type": "object",
-            "description": "An arbitrary JSON object for partner-specific data.",
-            "nullable": true,
-            "example": {
-              "custom_field": "custom_value"
-            }
+            "description": "The currency of the price.",
+            "example": "USD"
           }
         }
+      },
+      "distance": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "number", "format": "float" },
+          "unit": { "type": "string" }
+        }
+      },
+      "quote": {
+        "type": "boolean",
+        "description": "Indicates if the order is a quote (true) or a confirmed order (false)."
+      },
+      "partner_payload": {
+        "type": "object",
+        "description": "An arbitrary object provided by the partner during job creation for their own reference.",
+        "nullable": true,
+        "example": { "custom_field": "custom_value" }
+      },
+      "pickup_name": {
+        "type": "string",
+        "description": "The full name of the contact person at the pickup location."
+      },
+      "dropoff_name": {
+        "type": "string",
+        "description": "The full name of the contact person at the dropoff location."
+      },
+      "delivery_date": {
+        "type": "string",
+        "description": "The scheduled date for the delivery to begin, formatted as `YYYY-MM-DD`."
+      },
+      "delivery_start_time": {
+        "type": "string",
+        "description": "The scheduled start time for the delivery window, formatted as `HH:MM:SS`."
+      },
+      "driver_id": {
+        "type": "number",
+        "description": "A unique numeric identifier for the courier/driver."
+      },
+      "driver_name": {
+        "type": "string",
+        "description": "The full name of the assigned courier."
+      },
+      "driver_location": {
+        "type": "object",
+        "description": "The last known GPS coordinates of the driver.",
+        "properties": {
+          "lat": {
+            "type": "number",
+            "description": "The latitude of the driver's location."
+          },
+          "lng": {
+            "type": "number",
+            "description": "The longitude of the driver's location."
+          }
+        }
+      },
+      "driver_dropoff_phone_number": {
+        "type": "string",
+        "description": "The driver's phone number for dropoff-related communication."
+      },
+      "driver_pickup_phone_number": {
+        "type": "string",
+        "description": "The driver's phone number for pickup-related communication."
+      },
+      "driver_vehicle_make": {
+        "type": "string",
+        "description": "The make of the driver's vehicle (e.g., `Tesla`)."
+      },
+      "driver_vehicle_model": {
+        "type": "string",
+        "description": "The model of the driver's vehicle (e.g., `Model Z`)."
+      },
+      "driver_vehicle_year": {
+        "type": "number",
+        "description": "The manufacturing year of the driver's vehicle."
+      },
+      "dropoff_time_estimated": {
+        "type": "string",
+        "description": "The estimated time of arrival at the dropoff location, in a standard datetime format."
+      },
+      "pickup_address_street": {
+        "type": "string",
+        "description": "Street name of the pickup address."
+      },
+      "pickup_address_city": {
+        "type": "string",
+        "description": "City of the pickup address."
+      },
+      "pickup_address_country": {
+        "type": "string",
+        "description": "Country of the pickup address."
+      },
+      "pickup_address_number": {
+        "type": "string",
+        "description": "Street number of the pickup address."
+      },
+      "pickup_address_county": {
+        "type": "string",
+        "description": "County of the pickup address."
+      },
+      "pickup_address_state": {
+        "type": "string",
+        "description": "State of the pickup address."
+      },
+      "pickup_address_postal_code": {
+        "type": "string",
+        "description": "Postal or ZIP code of the pickup address."
+      },
+      "pickup_address_latitude": {
+        "type": "number",
+        "description": "Latitude coordinate of the pickup address."
+      },
+      "pickup_address_longitude": {
+        "type": "number",
+        "description": "Longitude coordinate of the pickup address."
+      },
+      "pickup_phone_number": {
+        "type": "string",
+        "description": "The contact phone number for the pickup location."
+      },
+      "pickup_instructions": {
+        "type": "string",
+        "description": "Special instructions for the courier at the pickup location."
+      },
+      "email": {
+        "type": "string",
+        "description": "The email address of the contact person at the pickup location."
+      },
+      "dropoff_address_street": {
+        "type": "string",
+        "description": "Street name of the dropoff address."
+      },
+      "dropoff_address_city": {
+        "type": "string",
+        "description": "City of the dropoff address."
+      },
+      "dropoff_address_country": {
+        "type": "string",
+        "description": "Country of the dropoff address."
+      },
+      "dropoff_address_number": {
+        "type": "string",
+        "description": "Street number of the dropoff address."
+      },
+      "dropoff_address_county": {
+        "type": "string",
+        "description": "County of the dropoff address."
+      },
+      "dropoff_address_state": {
+        "type": "string",
+        "description": "State of the dropoff address."
+      },
+      "dropoff_address_postal_code": {
+        "type": "string",
+        "description": "Postal or ZIP code of the dropoff address."
+      },
+      "dropoff_address_latitude": {
+        "type": "number",
+        "description": "Latitude coordinate of the dropoff address."
+      },
+      "dropoff_address_longitude": {
+        "type": "number",
+        "description": "Longitude coordinate of the dropoff address."
+      },
+      "dropoff_phone_number": {
+        "type": "string",
+        "description": "The contact phone number for the dropoff location."
+      },
+      "dropoff_instructions": {
+        "type": "string",
+        "description": "Special instructions for the courier at the dropoff location."
+      },
+      "dropoff_email": {
+        "type": "string",
+        "description": "The email of the entity to contact."
+      },
+      "package_description": {
+        "type": "string",
+        "description": "A description of the contents of the package being delivered."
+      },
+      "package_minimum_vehicle_size": {
+        "type": "string",
+        "description": "The minimum vehicle size required for this delivery (e.g., `CAR`, `BIKE`)."
+      },
+      "package_delivery_mode": {
+        "type": "string",
+        "description": "The delivery mode, indicating if it's on-demand (`NOW`) or scheduled."
+      },
+      "package_requirements": {
+        "type": "array",
+        "description": "A list of special requirements for the delivery (e.g., `photo_proof_of_delivery`).",
+        "items": { "type": "string" }
+      },
+      "items_count": {
+        "type": "number",
+        "description": "The number of items in the package."
+      },
+      "items": {
+        "type": "array",
+        "description": "A list of objects, each detailing an item in the package. Can be null.",
+        "items": { "type": "object" }
+      },
+      "weight": {
+        "type": "number",
+        "description": "The weight of the package."
+      },
+      "dimentions": {
+        "type": "object",
+        "description": "The dimentions of the package.",
+        "properties": {
+          "height": {
+            "type": "number",
+            "description": "The height of the package."
+          },
+          "length": {
+            "type": "number",
+            "description": "The length of the package."
+          },
+          "width": {
+            "type": "number",
+            "description": "The width of the package."
+          }
+        }
+      },
+      "package_value": {
+        "type": "number",
+        "description": "The declared value of the package, converted from cents."
+      },
+      "pickup_start_time": {
+        "type": "string",
+        "description": "The start time of the pickup window, formatted as `HH:MM:SS`."
+      },
+      "dropoff_start_time": {
+        "type": "string",
+        "description": "The start time of the dropoff window, formatted as `HH:MM:SS`."
+      },
+      "delivery_end_time": {
+        "type": "string",
+        "description": "The end time of the dropoff window, formatted as `HH:MM:SS`."
+      },
+      "dropoff_verification_image_url": {
+        "type": "string",
+        "description": "URL to a photo taken as proof of delivery. Available on relevant events."
+      },
+      "dropoff_signature_image_url": {
+        "type": "string",
+        "description": "URL to a signature captured as proof of delivery. Available on relevant events."
+      },
+      "cancellation_reason": {
+        "type": "string",
+        "description": "The reason for a delivery cancellation. Available on cancellation events."
+      },
+      "tip": {
+        "type": "number",
+        "description": "The tip amount for the driver, converted from cents."
+
+    }
+  }
       },
       "OrderCreated": {
         "type": "object",
