@@ -69,57 +69,47 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "pickup_address": {
-                    "type": "object",
-                    "properties": {
-                      "street": {
-                        "type": "string",
-                        "description": "Street name of the pickup address."
-                      },
-                      "city": {
-                        "type": "string",
-                        "description": "City of the pickup address."
-                      },
-                      "country": {
-                        "type": "string",
-                        "description": "Country of the pickup address."
-                      },
-                      "number": {
-                        "type": "string",
-                        "description": "Street number of the pickup address."
-                      },
-                      "secondary_number": {
-                        "type": "string",
-                        "description": "Apartment or suite number for the pickup address."
-                      },
-                      "county": {
-                        "type": "string",
-                        "description": "County of the pickup address."
-                      },
-                      "state": {
-                        "type": "string",
-                        "description": "State of the pickup address."
-                      },
-                      "postal_code": {
-                        "type": "string",
-                        "description": "Postal or ZIP code of the pickup address."
-                      },
-                      "latitude": {
-                        "type": "number",
-                        "description": "Latitude coordinate of the pickup address."
-                      },
-                      "longitude": {
-                        "type": "number",
-                        "description": "Longitude coordinate of the pickup address."
-                      }
+                  "pickup_address_street": {
+                    "type": "string",
+                    "description": "Street name of the pickup address."
                     },
-                    "required": [
-                      "street",
-                      "city",
-                      "country"
-                    ],
-                    "description": "The address where the order will be picked up."
-                  },
+                    "pickup_address_city": {
+                      "type": "string",
+                      "description": "City of the pickup address."
+                    },
+                    "pickup_address_country": {
+                      "type": "string",
+                      "description": "Country of the pickup address."
+                    },
+                    "pickup_address_number": {
+                      "type": "string",
+                      "description": "Street number of the pickup address."
+                    },
+                    "pickup_address_secondary_number": {
+                      "type": "string",
+                      "description": "Apartment or suite number for the pickup address."
+                    },
+                    "pickup_address_county": {
+                      "type": "string",
+                      "description": "County of the pickup address."
+                    },
+                    "pickup_address_state": {
+                      "type": "string",
+                      "description": "State of the pickup address."
+                    },
+                    "pickup_address_postal_code": {
+                      "type": "string",
+                      "description": "Postal or ZIP code of the pickup address."
+                    },
+                    "pickup_address_latitude": {
+                      "type": "number",
+                      "description": "Latitude coordinate of the pickup address."
+                    },
+                    "pickup_address_longitude": {
+                      "type": "number",
+                      "description": "Longitude coordinate of the pickup address."
+                    },
+                
                   "pickup_name": {
                     "type": "string",
                     "description": "Name of the contact person at the pickup location."
@@ -175,56 +165,45 @@
                     ],
                     "description": "Dimensions of the package."
                   },
-                  "dropoff_address": {
-                    "type": "object",
-                    "properties": {
-                      "street": {
-                        "type": "string",
-                        "description": "Street name of the dropoff address."
-                      },
-                      "city": {
-                        "type": "string",
-                        "description": "City of the dropoff address."
-                      },
-                      "country": {
-                        "type": "string",
-                        "description": "Country of the dropoff address."
-                      },
-                      "number": {
-                        "type": "string",
-                        "description": "Street number of the dropoff address."
-                      },
-                      "secondary_number": {
-                        "type": "string",
-                        "description": "Apartment or suite number for the dropoff address."
-                      },
-                      "county": {
-                        "type": "string",
-                        "description": "County of the dropoff address."
-                      },
-                      "state": {
-                        "type": "string",
-                        "description": "State of the dropoff address."
-                      },
-                      "postal_code": {
-                        "type": "string",
-                        "description": "Postal or ZIP code of the dropoff address."
-                      },
-                      "latitude": {
-                        "type": "number",
-                        "description": "Latitude coordinate of the dropoff address."
-                      },
-                      "longitude": {
-                        "type": "number",
-                        "description": "Longitude coordinate of the dropoff address."
-                      }
-                    },
-                    "required": [
-                      "street",
-                      "city",
-                      "country"
-                    ],
-                    "description": "The address where the order will be delivered."
+                  "dropoff_address_street": {
+                    "type": "string",
+                    "description": "Street name of the dropoff address."
+                  },
+                  "dropoff_address_city": {
+                    "type": "string",
+                    "description": "City of the dropoff address."
+                  },
+                  "dropoff_address_country": {
+                    "type": "string",
+                    "description": "Country of the dropoff address."
+                  },
+                  "dropoff_address_number": {
+                    "type": "string",
+                    "description": "Street number of the dropoff address."
+                  },
+                  "dropoff_address_secondary_number": {
+                    "type": "string",
+                    "description": "Apartment or suite number for the dropoff address."
+                  },
+                  "dropoff_address_county": {
+                    "type": "string",
+                    "description": "County of the dropoff address."
+                  },
+                  "dropoff_address_state": {
+                    "type": "string",
+                    "description": "State of the dropoff address."
+                  },
+                  "dropoff_address_postal_code": {
+                    "type": "string",
+                    "description": "Postal or ZIP code of the dropoff address."
+                  },
+                  "dropoff_address_latitude": {
+                    "type": "number",
+                    "description": "Latitude coordinate of the dropoff address."
+                  },
+                  "dropoff_address_longitude": {
+                    "type": "number",
+                    "description": "Longitude coordinate of the dropoff address."
                   },
                   "dropoff_name": {
                     "type": "string",
@@ -394,7 +373,9 @@
                   }
                 },
                 "required": [
-                  "pickup_address",
+                  "pickup_address_city",
+                  "pickup_address_country",
+                  "pickup_address_street",
                   "pickup_name",
                   "dropoff_address",
                   "dropoff_name",

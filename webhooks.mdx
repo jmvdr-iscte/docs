@@ -72,31 +72,27 @@ All webhook requests are sent as `POST` requests with a JSON payload. The struct
   "driver_vehicle_model": "string",
   "driver_vehicle_year": "number",
   "dropoff_time_estimated": "string",
-  "pickup_address": {
-    "street": "string",
-    "city": "string",
-    "country": "string",
-    "number": "string",
-    "county": "string",
-    "state": "string",
-    "postal_code": "string",
-    "latitude": "number",
-    "longitude": "number"
-  },
+  "pickup_address_street": "string",
+  "pickup_address_city": "string",
+  "pickup_address_country": "string",
+  "pickup_address_number": "string",
+  "pickup_address_county": "string",
+  "pickup_address_state": "string",
+  "pickup_address_postal_code": "string",
+  "pickup_address_latitude": "number",
+  "pickup_address_longitude": "number",
   "pickup_phone_number": "string",
   "pickup_instructions": "string",
   "email": "string",
-  "dropoff_address": {
-    "street": "string",
-    "city": "string",
-    "country": "string",
-    "number": "string",
-    "county": "string",
-    "state": "string",
-    "postal_code": "string",
-    "latitude": "number",
-    "longitude": "number"
-  },
+  "dropoff_address_street": "string",
+  "dropoff_address_city": "string",
+  "dropoff_address_country": "string",
+  "dropoff_address_number": "string",
+  "dropoff_address_county": "string",
+  "dropoff_address_state": "string",
+  "dropoff_address_postal_code": "string",
+  "dropoff_address_latitude": "number",
+  "dropoff_address_longitude": "number",
   "dropoff_phone_number": "string",
   "dropoff_instructions": "string",
   "dropoff_email": "string",
@@ -153,8 +149,26 @@ All webhook requests are sent as `POST` requests with a JSON payload. The struct
 | `driver_vehicle_model` | string | The model of the driver's vehicle (e.g., `Model Z`). |
 | `driver_vehicle_year` | number | The manufacturing year of the driver's vehicle. |
 | `dropoff_time_estimated` | string | The estimated time of arrival at the dropoff location, in a standard datetime format. |
-| `pickup_address` | object | A structured object containing the full pickup address details. |
-| `dropoff_address` | object | A structured object containing the full dropoff address details. |
+| `pickup_address_street` | string | Street name of the pickup address. |
+| `pickup_address_city` | string | City of the pickup address. |
+| `pickup_address_country` | string | Country of the pickup address. |
+| `pickup_address_number` | string | Street number of the pickup address. |
+| `pickup_address_secondary_number` | string | Apartment or suite number for the pickup address. |
+| `pickup_address_county` | string | County of the pickup address. |
+| `pickup_address_state` | string | State of the pickup address. |
+| `pickup_address_postal_code` | string | Postal or ZIP code of the pickup address. |
+| `pickup_address_latitude` | number | Latitude coordinate of the pickup address. |
+| `pickup_address_longitude` | number | Longitude coordinate of the pickup address. |
+| `dropoff_address_street` | string | Street name of the dropoff address. |
+| `dropoff_address_city` | string | City of the dropoff address. |
+| `dropoff_address_country` | string | Country of the dropoff address. |
+| `dropoff_address_number` | string | Street number of the dropoff address. |
+| `dropoff_address_secondary_number` | string | Apartment or suite number for the dropoff address. |
+| `dropoff_address_county` | string | County of the dropoff address. |
+| `dropoff_address_state` | string | State of the dropoff address. |
+| `dropoff_address_postal_code` | string | Postal or ZIP code of the dropoff address. |
+| `dropoff_address_latitude` | number | Latitude coordinate of the dropoff address. |
+| `dropoff_address_longitude` | number | Longitude coordinate of the dropoff address. |
 | `pickup_phone_number` | string | The contact phone number for the pickup location. |
 | `pickup_instructions` | string | Special instructions for the courier at the pickup location. |
 | `email` | string | The email address of the contact person at the pickup location. |
