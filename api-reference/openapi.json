@@ -659,6 +659,10 @@
         "type": "string",
         "description": "Street number of the pickup address."
       },
+      "pickup_address_secondary_number": {
+        "type": "string",
+        "description": "Secondary treet number of the pickup address."
+      },
       "pickup_address_county": {
         "type": "string",
         "description": "County of the pickup address."
@@ -706,6 +710,10 @@
       "dropoff_address_number": {
         "type": "string",
         "description": "Street number of the dropoff address."
+      },
+      "dropoff_address_secondary_number": {
+        "type": "string",
+        "description": "Apartment or suite number for the dropoff address."
       },
       "dropoff_address_county": {
         "type": "string",
