@@ -11,35 +11,23 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Authentication and Webhook Events",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Start Here",
             "pages": [
-              "auth",
               "index",
-              "webhooks",
-              "development"
-            ]
-          },
-          {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "auth",
+              "webhooks"
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "REST API",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "REST API",
             "pages": [
               "api-reference/introduction"
             ]
@@ -58,23 +46,6 @@
       }
     ],
     "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
     }
   },
   "logo": {
